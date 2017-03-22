@@ -9,5 +9,6 @@ public class SharkTest {
     @Test
     public void update() throws Exception {
         assertEquals("update({}, 0)", null, new Shark(new Point(0, 0), 5).update(Collections.emptySet(), IntStream.of(0)));
+        assertEquals("update({}, 5)", null, new Shark(new Point(1, 0), 5).update(Collections.emptySet(), IntStream.of(5)));
     }
 }

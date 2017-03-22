@@ -1,7 +1,7 @@
 import java.util.stream.IntStream
 
 
-class Shark (override val position: Point, override val movesLeft: Int) : Fish{
+data class Shark (override val position: Point, override val movesLeft: Int) : Fish{
 
     override fun update(objects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult {
         var killSet: Set<AquariumObject> = setOf()
