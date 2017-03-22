@@ -19,7 +19,22 @@ class Main {
     }
 
     fun updateOcean() {
+        var ocean: MutableList<Char> = Collections.emptyList()
 
+        for (i in 0..width) {
+            for (j in 0..height) {
+                for (obj in allObjects) {
+                    if (obj.position.equals(Point(i, j))) {
+                        when (obj) {
+                            is Plant -> ocean[(i + (j * width))] = 'P'
+                            is Minnow -> ocean[(i + (j * width))] = 'M'
+                            is Shark -> ocean[(i + (j * width))] = 'S'
+                        }
+                    }
+                    else ocean[(i + (j * width))] = ' '
+                }
+            }
+        }
     }
 
     fun displayOcean() {
