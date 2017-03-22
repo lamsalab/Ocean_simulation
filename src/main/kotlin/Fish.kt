@@ -16,13 +16,13 @@ open class Fish (override val movesLeft: Int, override val position: Point) : Aq
         }
     }
 
-    override fun update(objects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult {
+    override fun update(allObjects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult {
         var killSet: Set<AquariumObject> = setOf()
 
-        for (obj in objects) {
+        for (obj in allObjects) {
             if (obj.position == this.position) {
                 if (obj is Plant) {
-                    killSet.plus(obj)
+                    killSet = killSet.plus(obj)
                 }
             }
         }

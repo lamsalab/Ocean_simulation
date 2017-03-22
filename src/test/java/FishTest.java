@@ -1,5 +1,6 @@
-import kotlin.Pair;
+
 import org.junit.Test;
+
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,7 +15,7 @@ public class FishTest {
 
     @Test
     public void update() throws Exception {
-        assertEquals("update({}, 0", UpdateResult());
+        assertEquals("update({}, 0)",, new Fish(5, new Point(0, 0)).update());
     }
 
 }
