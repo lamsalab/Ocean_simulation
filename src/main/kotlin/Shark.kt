@@ -8,7 +8,7 @@ data class Shark (override val position: Point, override val movesLeft: Int) : F
         for (obj in allObjects) {
             if (obj.position.equals(this.position)) {
                 if (obj is Fish) {
-                    killSet.plus(obj)
+                    killSet = killSet.plus(obj)
                 }
             }
         }

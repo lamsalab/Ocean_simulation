@@ -26,7 +26,7 @@ public class MinnowTest {
                 new UpdateResult(plantSet, testMinnow, new Minnow(new Point(0,1), 5)),
                 testMinnow.update(plantSet, IntStream.of(0)));
         assertEquals("MinnowUpdate({Plant(0,0), Fish(1,1)}, 0)",
-                new UpdateResult(plantSet, testMinnow, new Minnow(new Point(0,1), 4)),
+                new UpdateResult(plantSet, testMinnow, new Minnow(new Point(0,1), 5)),
                 testMinnow.update(plantAndFishSet, IntStream.of(0)));
     }
 }
