@@ -2,7 +2,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.stream.IntStream
 
-class Main {
+object Main {
 
     val width = 10
     val height = 10
@@ -18,40 +18,32 @@ class Main {
         allObjects = updateResults.map { it -> it.new }
     }
 
-    fun updateOcean(): MutableList<Char>{
-        var ocean: MutableList<Char> = Collections.emptyList()
-
-        for (i in 0..width) {
-            for (j in 0..height) {
-                for (obj in allObjects) {
-                    if (obj.position.equals(Point(i, j))) {
-                        when (obj) {
-                            is Plant -> ocean[(i + (j * width))] = 'P'
-                            is Minnow -> ocean[(i + (j * width))] = 'M'
-                            is Shark -> ocean[(i + (j * width))] = 'S'
-                        }
+fun updateOcean(){
+    for (i in 0..height) {
+        for (j in 0..width) {
+            for (obj in allObjects) {
+                if (obj.position.equals(Point(i, j))) {
+                    when (obj) {
+                        is Plant -> System.out.print('P')
+                        is Minnow -> System.out.print('M')
+                        is Shark -> System.out.print('S')
                     }
-                    else ocean[(i + (j * width))] = ' '
                 }
+                else System.out.print(' ')
+
             }
         }
-
-        return ocean
+        System.out.print('\n')
     }
+}
 
-    fun displayOcean(ocean : MutableList<Char>) {
-        for (i in 0..height) {
-            for (j in 0..width) {
-                print(ocean[(j + (i * width))])
-            }
-        }
-    }
-
+    @JvmStatic
     fun main(args: Array<String>) {
 
         while(true){
             updateObjects()
-            displayOcean(updateOcean())
+            updateOcean()
+            //displayOcean(updateOcean())
             Thread.sleep(1000)
         }
 
