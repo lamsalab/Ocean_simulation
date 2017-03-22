@@ -2,6 +2,11 @@
 import org.junit.Test;
 
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.IntStream;
+
 import static org.junit.Assert.assertEquals;
 
 public class FishTest {
@@ -12,10 +17,4 @@ public class FishTest {
         assertEquals("nextPosition(3)", new Point(1, 0), new Fish(0, new Point(0,0)).nextPosition(3));
         assertEquals("nextPosition(100)", new Point(0, 1), new Fish(0, new Point(0,0)).nextPosition(100));
     }
-
-    @Test
-    public void update() throws Exception {
-        assertEquals("update({}, 0)",, new Fish(5, new Point(0, 0)).update());
-    }
-
 }

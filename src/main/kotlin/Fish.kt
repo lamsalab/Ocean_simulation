@@ -1,7 +1,8 @@
 import java.util.stream.IntStream
 
-open class Fish (override val movesLeft: Int, override val position: Point) : AquariumObject {
+interface Fish : AquariumObject {
 
+    val movesLeft: Int
 
     companion object {
         val MAXIMUM_CAPACITY = 5
@@ -14,23 +15,5 @@ open class Fish (override val movesLeft: Int, override val position: Point) : Aq
             2 -> Point(position.x, position.y - 1)
             else -> Point(position.x + 1, position.y)
         }
-    }
-
-    override fun update(allObjects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult {
-        var killSet: Set<AquariumObject> = setOf()
-
-        for (obj in allObjects) {
-            if (obj.position == this.position) {
-                if (obj is Plant) {
-                    killSet = killSet.plus(obj)
-                }
-            }
-        }
-
-        return UpdateResult(killSet, this,
-                if (killSet.isEmpty())
-                    Fish(movesLeft - 1, nextPosition(randomIntStream.findFirst().asInt))
-                else
-                    Fish(MAXIMUM_CAPACITY, nextPosition(randomIntStream.findFirst().asInt)))
     }
 }
