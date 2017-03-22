@@ -4,6 +4,5 @@ interface AquariumObject {
 
     val position: Point
 
-    fun nextPosition(randomInt: Int): Point
     fun update(allObjects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult
 }

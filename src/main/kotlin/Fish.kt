@@ -8,7 +8,7 @@ interface Fish : AquariumObject {
         val MAXIMUM_CAPACITY = 5
     }
 
-    override fun nextPosition(randomInt: Int): Point {
+    fun nextPosition(randomInt: Int): Point {
         return when (randomInt.mod(4)) {
             0 -> Point(position.x, position.y + 1)
             1 -> Point(position.x - 1, position.y)
