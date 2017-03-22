@@ -12,4 +12,6 @@ public class FishTest {
         assertEquals("nextPosition(100)", new Point(0, 1), new Fish(0, new Point(0,0)).nextPosition(100));
     }
 
+
+
 }
