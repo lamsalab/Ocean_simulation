@@ -1,9 +1,8 @@
-data class Plant (override val movesLeft: Int, override val position: Point) : AquariumObject{
-    override fun nextPosition(randomInt: Int): Point{
-        return Point(position.x, position.y)
-    }
+import java.util.stream.IntStream
 
-    override fun update(objects: Set<AquariumObject>): UpdateResult{
-        return UpdateResult()
+data class Plant (override val position: Point) : AquariumObject{
+
+    override fun update(objects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult{
+        return UpdateResult(setOf(), this, this)
     }
 }
