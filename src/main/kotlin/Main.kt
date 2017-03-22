@@ -1,4 +1,5 @@
 import java.util.*
+import java.util.concurrent.TimeUnit
 import java.util.stream.IntStream
 
 class Main {
@@ -7,7 +8,6 @@ class Main {
     val height = 10
 
     var allObjects: List<AquariumObject> = listOf(Shark(Point(0,0),5), Minnow(Point(2,0),5),Plant(Point(5, 1)))
-    var ocean: MutableList<Char> = Collections.emptyList()
 
 
     fun updateObjects() {
@@ -18,7 +18,7 @@ class Main {
         allObjects = updateResults.map { it -> it.new }
     }
 
-    fun updateOcean() {
+    fun updateOcean(): MutableList<Char>{
         var ocean: MutableList<Char> = Collections.emptyList()
 
         for (i in 0..width) {
@@ -35,14 +35,25 @@ class Main {
                 }
             }
         }
+
+        return ocean
     }
 
-    fun displayOcean() {
-
+    fun displayOcean(ocean : MutableList<Char>) {
+        for (i in 0..height) {
+            for (j in 0..width) {
+                print(ocean[(j + (i * width))])
+            }
+        }
     }
 
     fun main(args: Array<String>) {
 
+        while(true){
+            updateObjects()
+            displayOcean(updateOcean())
+            Thread.sleep(1000)
+        }
 
     }
 }
