@@ -4,14 +4,12 @@ import java.util.stream.IntStream
 
 object Main {
 
-    val width = 10
-    val height = 10
-
+    val aquarium = Aquarium(10, 10)
     var allObjects: List<AquariumObject> = listOf(Shark(Point(0,0),5), Minnow(Point(2,0),5),Plant(Point(5, 1)))
 
 
     fun updateObjects() {
-        var updateResults: List<UpdateResult> = allObjects.map { it -> it.update(allObjects.toSet(), IntStream.of(0)) }
+        var updateResults: List<UpdateResult> = allObjects.map { it -> it.update(allObjects.toSet(), IntStream.of(0), aquarium) }
         var killSet: Set<AquariumObject> = Collections.emptySet()
         updateResults.map { it -> it.killObjects }.forEach { it -> killSet = killSet.plus(it) }
         updateResults = updateResults.filter { it -> !(killSet.contains(it.old)) }
@@ -19,8 +17,8 @@ object Main {
     }
 
     fun updateOcean(){
-        for (i in 0..height) {
-            for (j in 0..width) {
+        for (i in 0..aquarium.height) {
+            for (j in 0..aquarium.width) {
                 for (obj in allObjects) {
                     if (obj.position.equals(Point(i, j))) {
                         when (obj) {

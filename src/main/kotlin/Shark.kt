@@ -2,7 +2,7 @@ import java.util.stream.IntStream
 
 data class Shark (override val position: Point, override val movesLeft: Int) : Fish{
 
-    override fun update(allObjects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult {
+    override fun update(allObjects: Set<AquariumObject>, randomIntStream: IntStream, aquarium: Aquarium): UpdateResult {
         var killSet: Set<AquariumObject> = setOf()
 
         for (obj in allObjects) {
@@ -14,9 +14,9 @@ data class Shark (override val position: Point, override val movesLeft: Int) : F
         }
         return UpdateResult(killSet, this,
                 if (killSet.isEmpty())
-                    Shark(nextPosition(randomIntStream.findFirst().asInt), movesLeft - 1)
+                    Shark(nextPosition(aquarium, randomIntStream.findFirst().asInt), movesLeft - 1)
                 else
-                    Shark(nextPosition(randomIntStream.findFirst().asInt), Fish.MAXIMUM_CAPACITY))
+                    Shark(nextPosition(aquarium, randomIntStream.findFirst().asInt), Fish.MAXIMUM_CAPACITY))
     }
 
 

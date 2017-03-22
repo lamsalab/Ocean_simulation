@@ -2,7 +2,7 @@ import java.util.stream.IntStream
 
 data class Minnow(override val position: Point, override val movesLeft: Int) : Fish {
 
-    override fun update(allObjects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult {
+    override fun update(allObjects: Set<AquariumObject>, randomIntStream: IntStream, aquarium: Aquarium): UpdateResult {
         var killSet: Set<AquariumObject> = setOf()
 
         for (obj in allObjects) {
@@ -15,9 +15,9 @@ data class Minnow(override val position: Point, override val movesLeft: Int) : F
 
         return UpdateResult(killSet, this,
                 if (killSet.isEmpty())
-                    Minnow(nextPosition(randomIntStream.findFirst().asInt), movesLeft - 1)
+                    Minnow(nextPosition(aquarium, randomIntStream.findFirst().asInt), movesLeft - 1)
                 else
-                    Minnow(nextPosition(randomIntStream.findFirst().asInt), Fish.MAXIMUM_CAPACITY))
+                    Minnow(nextPosition(aquarium, randomIntStream.findFirst().asInt), Fish.MAXIMUM_CAPACITY))
     }
 
 

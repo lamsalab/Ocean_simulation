@@ -20,16 +20,17 @@ public class PlantTest {
         plantAndFishSet.add(new Plant (new Point(1,0)));
         plantAndFishSet.add(new Minnow(new Point(1, 1), 5));
 
+        Aquarium aquarium = new Aquarium(10, 10);
 
         assertEquals("PlantUpdate({}, 0)",
                 new UpdateResult(Collections.emptySet(), testPlant, new Plant(new Point(0,0))),
-                testPlant.update(Collections.emptySet(), IntStream.of(0)));
+                testPlant.update(Collections.emptySet(), IntStream.of(0), aquarium));
         assertEquals("PlantUpdate({Plant(1,0)}, 0)",
                 new UpdateResult(Collections.emptySet(), testPlant, new Plant(new Point(0,0))),
-                testPlant.update(Collections.emptySet(), IntStream.of(0)));
+                testPlant.update(Collections.emptySet(), IntStream.of(0), aquarium));
         assertEquals("PlantUpdate({Plant(1,0), Fish(1,1)}, 0)",
                 new UpdateResult(Collections.emptySet(), testPlant, new Plant(new Point(0,0))),
-                testPlant.update(Collections.emptySet(), IntStream.of(0)));
+                testPlant.update(Collections.emptySet(), IntStream.of(0), aquarium));
     }
 
 }

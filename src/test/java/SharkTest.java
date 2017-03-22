@@ -19,14 +19,16 @@ public class SharkTest {
         sharkAndFishSet.add(new Minnow(new Point(0, 0), 5));
         sharkAndFishSet.add(new Shark(new Point(1, 1), 5));
 
+        Aquarium aquarium = new Aquarium(10, 10);
+
         assertEquals("SharkUpdate({}, 0)",
                 new UpdateResult(Collections.emptySet(), testShark, new Shark(new Point(0, 1), 4)),
-                testShark.update(Collections.emptySet(), IntStream.of(0)));
+                testShark.update(Collections.emptySet(), IntStream.of(0), aquarium));
         assertEquals("SharkUpdate({Minnow(0,0)}, 0)",
                 new UpdateResult(minnowSet, testShark, new Shark(new Point(0, 1), 5)),
-                testShark.update(minnowSet, IntStream.of(0)));
+                testShark.update(minnowSet, IntStream.of(0), aquarium));
         assertEquals("SharkUpdate({Minnow(0,0), Shark(1,1)}, 0)",
                 new UpdateResult(minnowSet, testShark, new Shark(new Point(0, 1), 5)),
-                testShark.update(sharkAndFishSet, IntStream.of(0)));
+                testShark.update(sharkAndFishSet, IntStream.of(0), aquarium));
     }
 }

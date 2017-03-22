@@ -8,12 +8,16 @@ interface Fish : AquariumObject {
         val MAXIMUM_CAPACITY = 5
     }
 
-    fun nextPosition(randomInt: Int): Point {
+    fun nextPositionRaw(randomInt: Int): Point {
         return when (randomInt.mod(4)) {
             0 -> Point(position.x, position.y + 1)
             1 -> Point(position.x - 1, position.y)
             2 -> Point(position.x, position.y - 1)
             else -> Point(position.x + 1, position.y)
         }
+    }
+
+    fun nextPosition(aq: Aquarium, randomInt: Int): Point {
+        return aq.wrap(nextPositionRaw(randomInt))
     }
 }
