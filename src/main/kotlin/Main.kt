@@ -18,24 +18,23 @@ object Main {
         allObjects = updateResults.map { it -> it.new }
     }
 
-fun updateOcean(){
-    for (i in 0..height) {
-        for (j in 0..width) {
-            for (obj in allObjects) {
-                if (obj.position.equals(Point(i, j))) {
-                    when (obj) {
-                        is Plant -> System.out.print('P')
-                        is Minnow -> System.out.print('M')
-                        is Shark -> System.out.print('S')
+    fun updateOcean(){
+        for (i in 0..height) {
+            for (j in 0..width) {
+                for (obj in allObjects) {
+                    if (obj.position.equals(Point(i, j))) {
+                        when (obj) {
+                            is Plant -> System.out.print('P')
+                            is Minnow -> System.out.print('M')
+                            is Shark -> System.out.print('S')
+                        }
                     }
+                    else System.out.print(' ')
                 }
-                else System.out.print(' ')
-
             }
+            System.out.print('\n')
         }
-        System.out.print('\n')
     }
-}
 
     @JvmStatic
     fun main(args: Array<String>) {
