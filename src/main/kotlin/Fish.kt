@@ -1,6 +1,7 @@
 import java.util.stream.IntStream
 
-class Fish (override val movesLeft: Int, override val position: Point) : AquariumObject {
+open class Fish (override val movesLeft: Int, override val position: Point) : AquariumObject {
+
 
     companion object {
         val MAXIMUM_CAPACITY = 5
@@ -15,7 +16,7 @@ class Fish (override val movesLeft: Int, override val position: Point) : Aquariu
         }
     }
 
-    open override fun update(objects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult {
+    override fun update(objects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult {
         var killSet: Set<AquariumObject> = setOf()
 
         for (obj in objects) {

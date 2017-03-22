@@ -12,6 +12,9 @@ public class FishTest {
         assertEquals("nextPosition(100)", new Point(0, 1), new Fish(0, new Point(0,0)).nextPosition(100));
     }
 
-
+    @Test
+    public void update() throws Exception {
+        assertEquals("update({}, 0", UpdateResult());
+    }
 
 }
