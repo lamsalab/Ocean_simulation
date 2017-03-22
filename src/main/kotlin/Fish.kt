@@ -9,7 +9,7 @@ data class Fish (override val movesLeft: Int, override val position: Pair<Int, I
         }
     }
 
-    /*override fun update(objects: Set<AquariumObject>): UpdateResult {
-        return UpdateResult()
-    }*/
+    override fun update(objects: Set<AquariumObject>): UpdateResult {
+
+    }
 }
