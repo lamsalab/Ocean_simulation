@@ -14,7 +14,7 @@ class Main {
         var updateResults: List<UpdateResult> = allObjects.map { it -> it.update(allObjects.toSet(), IntStream.of(0)) }
         var killSet: Set<AquariumObject> = Collections.emptySet()
         updateResults.map { it -> it.killObjects }.forEach { it -> killSet = killSet.plus(it) }
-        updateResults.filter { it -> !(killSet.contains(it.old)) }
+        updateResults = updateResults.filter { it -> !(killSet.contains(it.old)) }
         allObjects = updateResults.map { it -> it.new }
     }
 
