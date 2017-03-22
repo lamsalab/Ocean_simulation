@@ -1,5 +1,1 @@
-/**
- * Created by sheltah22 on 3/22/17.
- */
-class UpdateResult {
-}
+data class UpdateResult(val killObjects: Set<AquariumObject>, val old: AquariumObject, val new: AquariumObject)

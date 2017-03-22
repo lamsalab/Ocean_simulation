@@ -1,6 +1,6 @@
-data class Fish (val movesLeft: Int, val position: Pair<Int, Int>) {
+data class Fish (override val movesLeft: Int, override val position: Pair<Int, Int>) : AquariumObject {
 
-    fun nextPosition(randomInt: Int): Pair<Int, Int> {
+    override fun nextPosition(randomInt: Int): Pair<Int, Int> {
         return when (randomInt) {
             0 -> Pair(position.first, position.second + 1)
             1 -> Pair(position.first - 1, position.second)
@@ -9,8 +9,7 @@ data class Fish (val movesLeft: Int, val position: Pair<Int, Int>) {
         }
     }
 
-    fun next(x: Int): Int {
-        return x
-    }
-
+    /*override fun update(objects: Set<AquariumObject>): UpdateResult {
+        return UpdateResult()
+    }*/
 }

@@ -1,5 +1,1 @@
-/**
- * Created by sheltah22 on 3/22/17.
- */
-class Point {
-}
+data class Point(val x: Int, val y: Int)
