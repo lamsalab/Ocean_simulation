@@ -1,13 +1,12 @@
 import java.util.stream.IntStream
 
-
 data class Shark (override val position: Point, override val movesLeft: Int) : Fish{
 
-    override fun update(objects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult {
+    override fun update(allObjects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult {
         var killSet: Set<AquariumObject> = setOf()
 
-        for (obj in objects) {
-            if (obj.position == this.position) {
+        for (obj in allObjects) {
+            if (obj.position.equals(this.position)) {
                 if (obj is Fish) {
                     killSet.plus(obj)
                 }

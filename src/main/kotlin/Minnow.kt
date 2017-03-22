@@ -6,7 +6,7 @@ data class Minnow(override val position: Point, override val movesLeft: Int) : F
         var killSet: Set<AquariumObject> = setOf()
 
         for (obj in allObjects) {
-            if (obj.position == this.position) {
+            if (obj.position.equals(this.position)) {
                 if (obj is Plant) {
                     killSet = killSet.plus(obj)
                 }
