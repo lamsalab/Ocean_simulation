@@ -1,6 +1,6 @@
 import java.util.stream.IntStream
 
-data class Fish (override var movesLeft: Int, override val position: Point) : AquariumObject {
+data class Fish (override val movesLeft: Int, override val position: Point) : AquariumObject {
 
     const val MAXIMUM_CAPACITY = 5
 
@@ -14,16 +14,20 @@ data class Fish (override var movesLeft: Int, override val position: Point) : Aq
     }
 
     override fun update(objects: Set<AquariumObject>, randomIntStream: IntStream): UpdateResult {
+        var killSet: Set<AquariumObject> = setOf()
 
+        for (obj in objects) {
+            if (obj.position == this.position) {
+                if (obj is Plant) {
+                    killSet.plus(obj)
+                }
+            }
+        }
 
-        return UpdateResult(, this, makeFutureSelf(randomIntStream))
-    }
-
-    fun makeFutureSelf(randomIntStream: IntStream): Fish {
-        return Fish(movesLeft - 1, nextPosition(randomIntStream.findFirst().asInt))
-    }
-
-    fun refillHunger() {
-        movesLeft +=
+        return UpdateResult(killSet, this,
+                if (killSet.isEmpty())
+                    Fish(movesLeft - 1, nextPosition(randomIntStream.findFirst().asInt))
+                else
+                    Fish(MAXIMUM_CAPACITY, nextPosition(randomIntStream.findFirst().asInt)))
     }
 }
