@@ -2,7 +2,7 @@ group 'com.vocalabs.sharksandfishes'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.0.5'
+    ext.kotlin_version = '1.1.1'
 
     repositories {
         mavenCentral()
@@ -14,6 +14,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'kotlin'
+apply plugin: "org.jetbrains.kotlin.kapt"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -24,6 +25,25 @@ repositories {
 }
 
 dependencies {
+    kapt files("libs/egtest-processor-0.2.0-SNAPSHOT.jar")
+    kapt 'com.squareup:javapoet:1.8.0'
+    compile files("libs/egtest-annotations-0.2.0-SNAPSHOT.jar")
+
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+kapt {
+    generateStubs = false
+    arguments {
+        arg("egtest.targetDirectory", "$buildDir/generated/egTest")
+    }
+}
+
+sourceSets {
+    test {
+        java {
+            srcDir 'build/generated/egTest'
+        }
+    }
 }
