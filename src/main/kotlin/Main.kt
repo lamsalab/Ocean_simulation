@@ -1,3 +1,4 @@
+import com.vocalabs.egtest.annotation.Eg
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.stream.IntStream
@@ -8,7 +9,6 @@ object Main {
     var allObjects: List<AquariumObject> = listOf(Shark(Point(1, 1), 5), Minnow(Point(2, 0), 5), Plant(Point(5, 1)))
 
     fun updateObjects() {
-
         val random = Random()
         val intStream= random.ints(0, 100).limit(allObjects.size.toLong())
         val intArray = intStream.toArray()
@@ -21,29 +21,43 @@ object Main {
     }
 
     fun updateOcean(){
-        for (i in 0..aquarium.height) {
-            for (j in 0..aquarium.width) {
+        for (y in 0..aquarium.height) {
+            for (x in 0..aquarium.width) {
+                var charPrinted = false
+
                 for (obj in allObjects) {
-                    if (obj.position.equals(Point(j, i))) {
+                    if (obj.position.equals(Point(x, y))) {
                         when (obj) {
-                            is Plant -> System.out.print('P')
-                            is Minnow -> System.out.print('M')
-                            is Shark -> System.out.print('S')
+                            is Plant -> {
+                                print('P')
+                                charPrinted = true
+                            }
+                            is Minnow -> {
+                                print('M')
+                                charPrinted = true
+                            }
+                            is Shark -> {
+                                print('S')
+                                charPrinted = true
+                            }
                         }
                     }
-                    else System.out.print(' ')
+                }
+                if (!charPrinted) {
+                    print('-')
                 }
             }
-            System.out.print('\n')
+            print('\n')
         }
+        print('\n')
     }
 
     @JvmStatic
     fun main(args: Array<String>) {
 
         while(true){
-            updateObjects()
             updateOcean()
+            updateObjects()
             Thread.sleep(1000)
         }
 
