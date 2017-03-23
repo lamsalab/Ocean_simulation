@@ -24,7 +24,7 @@ object Main {
         for (i in 0..aquarium.height) {
             for (j in 0..aquarium.width) {
                 for (obj in allObjects) {
-                    if (obj.position.equals(Point(i, j))) {
+                    if (obj.position.equals(Point(j, i))) {
                         when (obj) {
                             is Plant -> System.out.print('P')
                             is Minnow -> System.out.print('M')

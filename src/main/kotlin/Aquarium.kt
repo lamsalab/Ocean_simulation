@@ -8,9 +8,13 @@ class Aquarium(w: Int, h: Int) {
             given = arrayOf("new Point(5, 5)"),
             returns = "new Point(0, 5)")
     @Eg(construct = arrayOf("3", "3"),
-            given = arrayOf("new Point(2, 3)"),
-            returns = "new Point(2, 0)")
+            given = arrayOf("new Point(1, -1)"),
+            returns = "new Point(1, 2)")
     fun wrap(point: Point): Point {
-        return Point(point.x % width, point.y % height)
+        return Point(fmod(point.x, width), fmod(point.y, height))
+    }
+
+    private fun fmod(x: Int, y: Int): Int {
+        return ((x % y) + y) % y
     }
 }
