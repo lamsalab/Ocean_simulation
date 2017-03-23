@@ -20,5 +20,12 @@ data class Minnow(override val position: Point, override val movesLeft: Int) : F
                     Minnow(nextPosition(aquarium, randomInt), Fish.MAXIMUM_CAPACITY))
     }
 
+    @Eg(construct = arrayOf("new Point(1, 1), 5"),
+            given = arrayOf("new Aquarium(5, 5), 1"),
+            returns = "new Point(0, 1)")
+    override fun nextPosition(aq: Aquarium, randomInt: Int): Point {
+        return super.nextPosition(aq, randomInt)
+    }
+
 
 }
