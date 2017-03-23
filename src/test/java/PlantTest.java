@@ -24,13 +24,13 @@ public class PlantTest {
 
         assertEquals("PlantUpdate({}, 0)",
                 new UpdateResult(Collections.emptySet(), testPlant, new Plant(new Point(0,0))),
-                testPlant.update(Collections.emptySet(), IntStream.of(0), aquarium));
+                testPlant.update(Collections.emptySet(), 0, aquarium));
         assertEquals("PlantUpdate({Plant(1,0)}, 0)",
                 new UpdateResult(Collections.emptySet(), testPlant, new Plant(new Point(0,0))),
-                testPlant.update(Collections.emptySet(), IntStream.of(0), aquarium));
+                testPlant.update(Collections.emptySet(), 0, aquarium));
         assertEquals("PlantUpdate({Plant(1,0), Fish(1,1)}, 0)",
                 new UpdateResult(Collections.emptySet(), testPlant, new Plant(new Point(0,0))),
-                testPlant.update(Collections.emptySet(), IntStream.of(0), aquarium));
+                testPlant.update(Collections.emptySet(), 0, aquarium));
     }
 
 }

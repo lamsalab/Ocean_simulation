@@ -23,12 +23,12 @@ public class MinnowTest {
 
         assertEquals("MinnowUpdate({}, 0)",
                 new UpdateResult(Collections.emptySet(), testMinnow, new Minnow(new Point(0,1), 4)),
-                testMinnow.update(Collections.emptySet(), IntStream.of(0), aquarium));
+                testMinnow.update(Collections.emptySet(), 0, aquarium));
         assertEquals("MinnowUpdate({Plant(0,0)}, 0)",
                 new UpdateResult(plantSet, testMinnow, new Minnow(new Point(0,1), 5)),
-                testMinnow.update(plantSet, IntStream.of(0), aquarium));
+                testMinnow.update(plantSet, 0, aquarium));
         assertEquals("MinnowUpdate({Plant(0,0), Fish(1,1)}, 0)",
                 new UpdateResult(plantSet, testMinnow, new Minnow(new Point(0,1), 5)),
-                testMinnow.update(plantAndFishSet, IntStream.of(0), aquarium));
+                testMinnow.update(plantAndFishSet, 0, aquarium));
     }
 }

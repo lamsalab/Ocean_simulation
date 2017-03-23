@@ -23,12 +23,12 @@ public class SharkTest {
 
         assertEquals("SharkUpdate({}, 0)",
                 new UpdateResult(Collections.emptySet(), testShark, new Shark(new Point(0, 1), 4)),
-                testShark.update(Collections.emptySet(), IntStream.of(0), aquarium));
+                testShark.update(Collections.emptySet(), 0, aquarium));
         assertEquals("SharkUpdate({Minnow(0,0)}, 0)",
                 new UpdateResult(minnowSet, testShark, new Shark(new Point(0, 1), 5)),
-                testShark.update(minnowSet, IntStream.of(0), aquarium));
+                testShark.update(minnowSet, 0, aquarium));
         assertEquals("SharkUpdate({Minnow(0,0), Shark(1,1)}, 0)",
                 new UpdateResult(minnowSet, testShark, new Shark(new Point(0, 1), 5)),
-                testShark.update(sharkAndFishSet, IntStream.of(0), aquarium));
+                testShark.update(sharkAndFishSet, 0, aquarium));
     }
 }
