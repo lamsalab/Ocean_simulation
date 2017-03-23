@@ -5,7 +5,7 @@ import java.util.stream.IntStream
 object Main {
 
     val aquarium = Aquarium(10, 10)
-    var allObjects: List<AquariumObject> = listOf(Shark(Point(0,0),5), Minnow(Point(2,0),5),Plant(Point(5, 1)))
+    var allObjects: List<AquariumObject> = listOf(Shark(Point(1, 1), 5), Minnow(Point(2, 0), 5), Plant(Point(5, 1)))
 
     fun updateObjects() {
 
@@ -44,7 +44,6 @@ object Main {
         while(true){
             updateObjects()
             updateOcean()
-            //displayOcean(updateOcean())
             Thread.sleep(1000)
         }
 

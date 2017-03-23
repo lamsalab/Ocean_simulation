@@ -18,7 +18,4 @@ data class Shark (override val position: Point, override val movesLeft: Int) : F
                 else
                     Shark(nextPosition(aquarium, randomInt), Fish.MAXIMUM_CAPACITY))
     }
-
-
-
 }
