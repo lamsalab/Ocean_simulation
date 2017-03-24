@@ -6,26 +6,29 @@ import java.util.stream.IntStream
 object Main {
 
     val aquarium = Aquarium(10, 10)
-    var allObjects: List<AquariumObject> = listOf(Shark(Point(1, 1), 5), Minnow(Point(2, 0), 5), Plant(Point(5, 1)))
+    val allObjects: List<AquariumObject> = listOf(Shark(Point(1, 1), 5), Minnow(Point(2, 0), 5), Plant(Point(5, 1)))
 
-    fun updateObjects() {
+    @Eg(construct = arrayOf(""),
+            given = arrayOf("new ArrayList().addAll(new Minnow(new Point(1, 1), 5))"),
+            returns = "new ArrayList().addAll(new Minnow(new Point(1, 1), 4))")
+    fun updateObjects(listOfObjects: List<AquariumObject>): List<AquariumObject> {
         val random = Random()
-        val intStream= random.ints(0, 100).limit(allObjects.size.toLong())
+        //val intStream= random.ints(0, 100).limit(listOfObjects.size.toLong())
         val intArray = intStream.toArray()
 
-        var updateResults: List<UpdateResult> = allObjects.mapIndexed { i, aquariumObject ->  aquariumObject.update(allObjects.toSet(), intArray[i], aquarium)}
+        var updateResults: List<UpdateResult> = listOfObjects.mapIndexed { i, aquariumObject ->  aquariumObject.update(listOfObjects.toSet(), intArray[i], aquarium)}
         var killSet: Set<AquariumObject> = Collections.emptySet()
         updateResults.map { it -> it.killObjects }.forEach { it -> killSet = killSet.plus(it) }
         updateResults = updateResults.filter { it -> !(killSet.contains(it.old)) }
-        allObjects = updateResults.map { it -> it.new }
+        return updateResults.map { it -> it.new }
     }
 
-    fun updateOcean(){
+    fun printOcean(listOfObjects: List<AquariumObject>){
         for (y in 0..aquarium.height) {
             for (x in 0..aquarium.width) {
                 var charPrinted = false
 
-                for (obj in allObjects) {
+                for (obj in listOfObjects) {
                     if (obj.position.equals(Point(x, y))) {
                         when (obj) {
                             is Plant -> {
@@ -54,10 +57,9 @@ object Main {
 
     @JvmStatic
     fun main(args: Array<String>) {
-
+        printOcean(allObjects)
         while(true){
-            updateOcean()
-            updateObjects()
+            printOcean(updateObjects(allObjects))
             Thread.sleep(1000)
         }
 
