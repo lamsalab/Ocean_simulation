@@ -5,9 +5,6 @@ import javafx.application.Platform
 import javafx.scene.canvas.GraphicsContext
 import javafx.scene.paint.Color
 
-
-
-
 /**
  * Runs the simulator
  */
@@ -16,16 +13,13 @@ class Simulator(val gc: GraphicsContext, var x: Double, var y: Double) : Runnabl
     override fun run() {
 
         val aquarium = Aquarium(x.toInt() / 50, y.toInt() / 50)
-        x += 25
-        y += 25
 
-        val allObjects: List<AquariumObject> = Main.generateObjectList(10, 5, 5, aquarium)
-
+        val allObjects: List<AquariumObject> = Main.generateObjectList(10, 10, 5, aquarium)
 
         var ocean: List<AquariumObject> = allObjects
         drawOcean(gc, ocean, aquarium)
         while(true) {
-            Thread.sleep(1000)
+            Thread.sleep(750)
             Platform.runLater {
                 ocean = Main.updateObjects(ocean, aquarium)
                 drawOcean(gc, ocean, aquarium)
@@ -45,16 +39,16 @@ class Simulator(val gc: GraphicsContext, var x: Double, var y: Double) : Runnabl
                         when (obj) {
                             is Plant -> {
                                 gc.setFill(Color.GREEN)
-                                gc.fillOval(obj.position.x * 50.0 + 25.0, obj.position.y * 50.0 + 25.0, 50.0, 50.0)
+                                gc.fillOval(obj.position.x * 50.0, obj.position.y * 50.0, 50.0, 50.0)
                             }
                             is Minnow -> {
                                 gc.setFill(Color.YELLOW)
-                                gc.fillOval(obj.position.x * 50.0 + 25.0, obj.position.y * 50.0 + 25.0, 50.0, 50.0)
+                                gc.fillOval(obj.position.x * 50.0, obj.position.y * 50.0, 50.0, 50.0)
 
                             }
                             is Shark -> {
                                 gc.setFill(Color.ORANGE)
-                                gc.fillOval(obj.position.x * 50.0 + 25.0, obj.position.y * 50.0 + 25.0, 50.0, 50.0)
+                                gc.fillOval(obj.position.x * 50.0, obj.position.y * 50.0, 50.0, 50.0)
                             }
                         }
                     }
