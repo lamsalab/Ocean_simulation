@@ -1,6 +1,6 @@
 package com.vocalabs.aquarium
 
-//import com.vocalabs.egtest.annotation.Eg
+import com.vocalabs.egtest.annotation.Eg
 import com.vocalabs.aquarium.Point
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -9,17 +9,17 @@ import java.util.stream.IntStream
 object Main {
 
     val aquarium = Aquarium(10, 10)
-    val allObjects: List<AquariumObject> = listOf(Shark(Point(1, 1), 5), Minnow(Point(2, 0), 5), Plant(Point(5, 1)))
+    var allObjects: List<AquariumObject> = listOf(Shark(Point(1, 1), 5), Minnow(Point(2, 0), 5), Plant(Point(5, 1)))
 
-   /* @Eg(construct = arrayOf(""),
+   /*@Eg(construct = arrayOf(""),
             given = arrayOf("new ArrayList().addAll(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 1), 5))"),
-            returns = "new ArrayList().addAll(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 1), 4))")*/
+            returns = "new ArrayList().addAll(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 2), 4))")*/
     fun updateObjects(listOfObjects: List<AquariumObject>): List<AquariumObject> {
         val random = Random()
         //val intStream= random.ints(0, 100).limit(listOfObjects.size.toLong())
         //val intArray = intStream.toArray()
 
-        var updateResults: List<UpdateResult> = listOfObjects.mapIndexed { i, aquariumObject ->  aquariumObject.update(listOfObjects.toSet(), intArray[i], aquarium)}
+        var updateResults: List<UpdateResult> = listOfObjects.map { it ->  it.update(listOfObjects.toSet(), 0, aquarium)}
         var killSet: Set<AquariumObject> = Collections.emptySet()
         updateResults.map { it -> it.killObjects }.forEach { it -> killSet = killSet.plus(it) }
         updateResults = updateResults.filter { it -> !(killSet.contains(it.old)) }
@@ -62,7 +62,8 @@ object Main {
     fun main(args: Array<String>) {
         printOcean(allObjects)
         while(true){
-            printOcean(updateObjects(allObjects))
+            allObjects = updateObjects(allObjects)
+            printOcean(allObjects)
             Thread.sleep(1000)
         }
 

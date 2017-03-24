@@ -38,11 +38,11 @@ class Simulator(val gc: GraphicsContext) : Runnable {
         gc.setFill(Color.BLUE)
         gc.fillRect(0.0, 0.0, 500.0, 500.0)
         gc.setFill(Color.YELLOW)
-        gc.fillOval(sx, 60.0, 10.0, 40.0)
+        //gc.fillOval(sx, 60.0, 10.0, 40.0)
         gc.setFill(Color.ORANGE)
-        gc.fillRoundRect(mx, 45.0, 20.0, 40.0, 2.0, 3.0)
+        //gc.fillRoundRect(mx, 45.0, 20.0, 40.0, 2.0, 3.0)
         gc.setFill(Color.GREEN)
-        gc.fillOval(px, 50.0, 10.0, 10.0)
+        //gc.fillOval(px, 50.0, 10.0, 10.0)
 
 
         /*  gc.fill = color
