@@ -41,16 +41,16 @@ data class Shark (override val position: Point, override val movesLeft: Int) : F
             var y = this.position.y - i
             for (j in 0 .. 2) {
                 if (this.canPlaceObject(x, y, existingObjects))
-                    return Minnow(Point(x, y), Fish.MAXIMUM_CAPACITY)
+                    return Shark(Point(x, y), Fish.MAXIMUM_CAPACITY)
                 x += i * j
                 if (this.canPlaceObject(x, y, existingObjects))
-                    return Minnow(Point(x, y), Fish.MAXIMUM_CAPACITY)
+                    return Shark(Point(x, y), Fish.MAXIMUM_CAPACITY)
                 y += i * j
                 if (this.canPlaceObject(x, y, existingObjects))
-                    return Minnow(Point(x, y), Fish.MAXIMUM_CAPACITY)
+                    return Shark(Point(x, y), Fish.MAXIMUM_CAPACITY)
                 x -= i * j
                 if (this.canPlaceObject(x, y, existingObjects))
-                    return Minnow(Point(x, y), Fish.MAXIMUM_CAPACITY)
+                    return Shark(Point(x, y), Fish.MAXIMUM_CAPACITY)
                 y -= i * j
             }
         }
