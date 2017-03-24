@@ -11,11 +11,11 @@ import javafx.scene.paint.Color
 /**
  * Runs the simulator
  */
-class Simulator(val gc: GraphicsContext) : Runnable {
+class Simulator(val gc: GraphicsContext, val x: Double, val y: Double) : Runnable {
 
     override fun run() {
 
-        val aquarium = Aquarium(500, 500)
+        val aquarium = Aquarium(x.toInt(), y.toInt())
         val allObjects: List<AquariumObject> = listOf(Shark(Point(100, 100), 10), Minnow(Point(200, 250), 10), Plant(Point(300, 100)))
 
 
@@ -35,23 +35,25 @@ class Simulator(val gc: GraphicsContext) : Runnable {
 
         gc.setFill(Color.BLUE)
         gc.fillRect(0.0, 0.0, aquarium.height.toDouble(), aquarium.width.toDouble())
-        for (y in 0..500) {
-            for (x in 0..500) {
+        for (y in 0..this.y.toInt()) {
+            for (x in 0..this.x.toInt()) {
                 for (obj in ocean) {
                     if (obj.position.equals(Point(x, y))) {
                         when (obj) {
                             is Plant -> {
                                 gc.setFill(Color.GREEN)
-                                gc.fillOval(x.toDouble() * 50, y.toDouble() * 50, 20.0, 20.0)
+                                gc.fillOval(x.toDouble() * (this.x/10), y.toDouble() * (this.y/10), 20.0, 20.0)
                             }
                             is Minnow -> {
                                 gc.setFill(Color.YELLOW)
-                                gc.fillOval(x.toDouble() * 50, y.toDouble() * 50, 10.0, 40.0)
+                                gc.fillOval(x.toDouble() * (this.x/10),
+                                        y.toDouble() * (this.y/10), 10.0, 40.0)
 
                             }
                             is Shark -> {
                                 gc.setFill(Color.ORANGE)
-                                gc.fillRoundRect(x.toDouble() * 50, y.toDouble() * 50, 20.0, 40.0, 2.0, 3.0)
+                                gc.fillRoundRect(x.toDouble() * (this.x/10),
+                                        y.toDouble() * (this.y/10), 20.0, 40.0, 2.0, 3.0)
                             }
                         }
                     }
