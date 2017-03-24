@@ -19,7 +19,7 @@ data class Minnow(override val position: Point, override val movesLeft: Int) : F
             if (obj.position == this.position) {
                 if (obj is Plant) {
                     killSet = killSet.plus(obj)
-                    addSet = addSet.plus(newFish(allObjects))
+                    addSet = addSet.plus(newFish(allObjects.plus(addSet.filterNotNull())))
                 }
             }
         }

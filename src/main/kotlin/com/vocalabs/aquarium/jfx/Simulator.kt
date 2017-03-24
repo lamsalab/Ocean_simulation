@@ -11,12 +11,15 @@ import javafx.scene.paint.Color
 /**
  * Runs the simulator
  */
-class Simulator(val gc: GraphicsContext, val x: Double, val y: Double) : Runnable {
+class Simulator(val gc: GraphicsContext, var x: Double, var y: Double) : Runnable {
 
     override fun run() {
 
-        val aquarium = Aquarium(x.toInt(), y.toInt())
-        val allObjects: List<AquariumObject> = listOf(Shark(Point(100, 100), 10), Minnow(Point(200, 250), 10), Plant(Point(300, 100)))
+        val aquarium = Aquarium(x.toInt() / 50, y.toInt() / 50)
+        x += 25
+        y += 25
+
+        val allObjects: List<AquariumObject> = Main.generateObjectList(10, 5, 5, aquarium)
 
 
         var ocean: List<AquariumObject> = allObjects
@@ -34,26 +37,24 @@ class Simulator(val gc: GraphicsContext, val x: Double, val y: Double) : Runnabl
     private fun drawOcean(gc: GraphicsContext, ocean: List<AquariumObject>, aquarium: Aquarium) {
 
         gc.setFill(Color.BLUE)
-        gc.fillRect(0.0, 0.0, aquarium.height.toDouble(), aquarium.width.toDouble())
-        for (y in 0..this.y.toInt()) {
-            for (x in 0..this.x.toInt()) {
+        gc.fillRect(0.0, 0.0, this.x, this.y)
+        for (y in 0..aquarium.height) {
+            for (x in 0..aquarium.width) {
                 for (obj in ocean) {
                     if (obj.position.equals(Point(x, y))) {
                         when (obj) {
                             is Plant -> {
                                 gc.setFill(Color.GREEN)
-                                gc.fillOval(x.toDouble() * (this.x/10), y.toDouble() * (this.y/10), 20.0, 20.0)
+                                gc.fillOval(obj.position.x * 50.0 + 25.0, obj.position.y * 50.0 + 25.0, 50.0, 50.0)
                             }
                             is Minnow -> {
                                 gc.setFill(Color.YELLOW)
-                                gc.fillOval(x.toDouble() * (this.x/10),
-                                        y.toDouble() * (this.y/10), 10.0, 40.0)
+                                gc.fillOval(obj.position.x * 50.0 + 25.0, obj.position.y * 50.0 + 25.0, 50.0, 50.0)
 
                             }
                             is Shark -> {
                                 gc.setFill(Color.ORANGE)
-                                gc.fillRoundRect(x.toDouble() * (this.x/10),
-                                        y.toDouble() * (this.y/10), 20.0, 40.0, 2.0, 3.0)
+                                gc.fillOval(obj.position.x * 50.0 + 25.0, obj.position.y * 50.0 + 25.0, 50.0, 50.0)
                             }
                         }
                     }
