@@ -24,8 +24,8 @@ object Main {
     }
 
     fun printOcean(listOfObjects: List<AquariumObject>){
-        for (y in 0..aquarium.height) {
-            for (x in 0..aquarium.width) {
+        for (y in 0..(aquarium.height - 1)) {
+            for (x in 0..(aquarium.width - 1)) {
                 var charPrinted = false
 
                 for (obj in listOfObjects) {
