@@ -6,50 +6,49 @@ import java.util.stream.IntStream
 
 object Main {
 
-    val aquarium = Aquarium(10, 10)
     val random = Random()
 
-    fun generateObjectList(numPlants: Int, numMinnows: Int, numSharks: Int): List<AquariumObject> {
+    fun generateObjectList(numPlants: Int, numMinnows: Int, numSharks: Int, aquarium: Aquarium): List<AquariumObject> {
         var retList: Set<AquariumObject> = setOf()
 
         for (i in 1..numPlants) {
-            retList = retList.plus(generatePlant(retList))
+            retList = retList.plus(generatePlant(retList, aquarium))
         }
         for (i in 1..numMinnows) {
-            retList = retList.plus(generateMinnow(retList))
+            retList = retList.plus(generateMinnow(retList, aquarium))
         }
         for (i in 1..numSharks) {
-            retList = retList.plus(generateShark(retList))
+            retList = retList.plus(generateShark(retList, aquarium))
         }
         return retList.toList()
     }
 
-    fun generatePoint(): Point {
+    fun generatePoint(aquarium: Aquarium): Point {
         return aquarium.wrap(Point(random.nextInt(), random.nextInt()))
     }
 
-    fun generatePlant(allObects: Set<AquariumObject>): Plant {
+    fun generatePlant(allObjects: Set<AquariumObject>, aquarium: Aquarium): Plant {
         while (true) {
-            val potentialPlant = Plant(generatePoint())
-            if (potentialPlant.canPlaceObject(potentialPlant.position.x, potentialPlant.position.y, allObects)) {
+            val potentialPlant = Plant(generatePoint(aquarium))
+            if (potentialPlant.canPlaceObject(potentialPlant.position.x, potentialPlant.position.y, allObjects)) {
                 return potentialPlant
             }
         }
     }
 
-    fun generateMinnow(allObects: Set<AquariumObject>): Minnow {
+    fun generateMinnow(allObjects: Set<AquariumObject>, aquarium: Aquarium): Minnow {
         while (true) {
-            val potentialMinnow = Minnow(generatePoint(), Fish.MAXIMUM_CAPACITY)
-            if (potentialMinnow.canPlaceObject(potentialMinnow.position.x, potentialMinnow.position.y, allObects)) {
+            val potentialMinnow = Minnow(generatePoint(aquarium), Fish.MAXIMUM_CAPACITY)
+            if (potentialMinnow.canPlaceObject(potentialMinnow.position.x, potentialMinnow.position.y, allObjects)) {
                 return potentialMinnow
             }
         }
     }
 
-    fun generateShark(allObects: Set<AquariumObject>): Shark {
+    fun generateShark(allObjects: Set<AquariumObject>, aquarium: Aquarium): Shark {
         while (true) {
-            val potentialShark = Shark(generatePoint(), Fish.MAXIMUM_CAPACITY)
-            if (potentialShark.canPlaceObject(potentialShark.position.x, potentialShark.position.y, allObects)) {
+            val potentialShark = Shark(generatePoint(aquarium), Fish.MAXIMUM_CAPACITY)
+            if (potentialShark.canPlaceObject(potentialShark.position.x, potentialShark.position.y, allObjects)) {
                 return potentialShark
             }
         }
@@ -61,7 +60,7 @@ object Main {
             This test runs when 0 is inputted into aquariumObject.update() instead of random.nextInt()*/
 
     @JvmStatic
-    fun updateObjects(listOfObjects: List<AquariumObject>): List<AquariumObject> {
+    fun updateObjects(listOfObjects: List<AquariumObject>, aquarium: Aquarium): List<AquariumObject> {
         var updateResults: List<UpdateResult> = listOfObjects.map { aquariumObject ->  aquariumObject.update(listOfObjects.toSet(), random.nextInt(), aquarium)}
         var killSet: Set<AquariumObject> = Collections.emptySet()
         var addSet: Set<AquariumObject?> = Collections.emptySet()
@@ -83,7 +82,7 @@ object Main {
         return returnList
     }
 
-    fun printOcean(listOfObjects: List<AquariumObject>){
+    fun printOcean(listOfObjects: List<AquariumObject>, aquarium: Aquarium){
         for (y in 0..(aquarium.height - 1)) {
             for (x in 0..(aquarium.width - 1)) {
                 var charPrinted = false
@@ -115,15 +114,16 @@ object Main {
         print('\n')
     }
 
-  /*  @JvmStatic
+    @JvmStatic
     fun main(args: Array<String>) {
-        var allObjects = generateObjectList(4, 4, 4)
-        printOcean(allObjects)
+        val aquarium = Aquarium(10, 10)
+        var allObjects = generateObjectList(4, 4, 4, aquarium)
+        printOcean(allObjects, aquarium)
         while(true){
-            allObjects = updateObjects(allObjects)
-            printOcean(allObjects)
+            allObjects = updateObjects(allObjects, aquarium)
+            printOcean(allObjects, aquarium)
             Thread.sleep(1000)
         }
 
-    }*/
+    }
 }
