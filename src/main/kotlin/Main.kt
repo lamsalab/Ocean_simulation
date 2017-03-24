@@ -57,7 +57,8 @@ object Main {
 
     /*@Eg(construct = arrayOf(""),
             given = arrayOf("new java.util.ArrayList().add(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 1), 5))"),
-            returns = "new java.util.ArrayList().add(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 2), 4))")*/
+            returns = "new java.util.ArrayList().add(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 2), 4))")
+            These tests will pass when 0 is passed to update instead of random.nextInt()*/
     @JvmStatic
     fun updateObjects(listOfObjects: List<AquariumObject>): List<AquariumObject> {
         var updateResults: List<UpdateResult> = listOfObjects.map { aquariumObject ->  aquariumObject.update(listOfObjects.toSet(), random.nextInt(), aquarium)}
@@ -115,7 +116,7 @@ object Main {
 
     @JvmStatic
     fun main(args: Array<String>) {
-        var allObjects = generateObjectList(3, 3, 3)
+        var allObjects = generateObjectList(4, 4, 4)
         printOcean(allObjects)
         while(true){
             allObjects = updateObjects(allObjects)
