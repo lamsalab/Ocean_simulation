@@ -7,7 +7,7 @@ import java.util.stream.IntStream
 object Main {
 
     val aquarium = Aquarium(10, 10)
-    val allObjects: List<AquariumObject> = listOf(Shark(Point(1, 1), 5), Minnow(Point(2, 0), 5), Plant(Point(5, 1)))
+    var allObjects: List<AquariumObject> = listOf(Shark(Point(1, 1), 5), Minnow(Point(2, 0), 5), Plant(Point(5, 1)))
 
     /*@Eg(construct = arrayOf(""),
             given = arrayOf("new java.util.ArrayList().add(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 1), 5))"),
@@ -16,7 +16,7 @@ object Main {
     fun updateObjects(listOfObjects: List<AquariumObject>): List<AquariumObject> {
         val random = Random()
 
-        var updateResults: List<UpdateResult> = listOfObjects.mapIndexed { i, aquariumObject ->  aquariumObject.update(listOfObjects.toSet(), 0, aquarium)}
+        var updateResults: List<UpdateResult> = listOfObjects.mapIndexed { i, aquariumObject ->  aquariumObject.update(listOfObjects.toSet(), random.nextInt(), aquarium)}
         var killSet: Set<AquariumObject> = Collections.emptySet()
         updateResults.map { it -> it.killObjects }.forEach { it -> killSet = killSet.plus(it) }
         updateResults = updateResults.filter { it -> !(killSet.contains(it.old)) }
@@ -59,7 +59,8 @@ object Main {
     fun main(args: Array<String>) {
         printOcean(allObjects)
         while(true){
-            printOcean(updateObjects(allObjects))
+            allObjects = updateObjects(allObjects)
+            printOcean(allObjects)
             Thread.sleep(1000)
         }
 
