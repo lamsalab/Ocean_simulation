@@ -23,4 +23,6 @@ interface Fish : AquariumObject {
     fun nextPosition(aq: Aquarium, randomInt: Int): Point {
         return aq.wrap(nextPositionRaw(randomInt, position))
     }
+
+    fun newFish(existingObjects: Set<AquariumObject>): Fish?
 }

@@ -18,18 +18,22 @@ object Main {
         val random = Random()
         var updateResults: List<UpdateResult> = listOfObjects.map { aquariumObject ->  aquariumObject.update(listOfObjects.toSet(), random.nextInt(), aquarium)}
         var killSet: Set<AquariumObject> = Collections.emptySet()
-        var addSet: Set<AquariumObject> = Collections.emptySet()
+        var addSet: Set<AquariumObject?> = Collections.emptySet()
         var returnList: MutableList<AquariumObject> = mutableListOf()
 
         updateResults.map { it -> it.killObjects }.forEach { it -> killSet = killSet.plus(it) }
         updateResults.map { it -> it.addObjects }.forEach { it -> addSet = addSet.plus(it) }
+
         for (i in 0..1) {
-            addSet = addSet.plus(Plant(aquarium.wrap(Point(random.nextInt(), random.nextInt()))))
+            val potentialPlant = Plant(aquarium.wrap(Point(random.nextInt(), random.nextInt())))
+            if (potentialPlant.canPlaceObject(potentialPlant.position.x, potentialPlant.position.y, listOfObjects.toSet())) {
+                addSet = addSet.plus(potentialPlant)
+            }
         }
 
         updateResults = updateResults.filter { it -> !(killSet.contains(it.old)) }
         returnList.addAll(updateResults.map { it -> it.new })
-        returnList.addAll(addSet)
+        returnList.addAll(addSet.filterNotNull())
         return returnList
     }
 
@@ -39,7 +43,7 @@ object Main {
                 var charPrinted = false
 
                 for (obj in listOfObjects) {
-                    if (obj.position.equals(Point(x, y))) {
+                    if (!obj.equals(null) && obj.position.equals(Point(x, y))) {
                         when (obj) {
                             is Plant -> {
                                 print('P')

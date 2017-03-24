@@ -14,13 +14,13 @@ data class Shark (override val position: Point, override val movesLeft: Int) : F
             returns = "new com.vocalabs.aquarium.UpdateResult(java.util.Collections.emptySet(), java.util.Collections.emptySet(), new com.vocalabs.aquarium.Shark(new com.vocalabs.aquarium.Point(1, 0), 5), new com.vocalabs.aquarium.Shark(new com.vocalabs.aquarium.Point(1, 2), 4))")
     override fun update(allObjects: Set<AquariumObject>, randomInt: Int, aquarium: Aquarium): UpdateResult {
         var killSet: Set<AquariumObject> = setOf()
-        var addSet: Set<AquariumObject> = setOf()
+        var addSet: Set<AquariumObject?> = setOf()
 
         for (obj in allObjects) {
             if (obj.position.equals(this.position)) {
                 if (obj is Minnow) {
                     killSet = killSet.plus(obj)
-                    addSet = addSet.plus(Minnow(Point(this.position.x, this.position.y + 1), Fish.Companion.MAXIMUM_CAPACITY))
+                    addSet = addSet.plus(newFish(allObjects))
                 }
             }
         }
@@ -33,5 +33,27 @@ data class Shark (override val position: Point, override val movesLeft: Int) : F
             return UpdateResult(killSet, addSet, this, Shark(nextPosition(aquarium, randomInt), movesLeft - 1))
         else
             return UpdateResult(killSet, addSet, this, Shark(nextPosition(aquarium, randomInt), Fish.Companion.MAXIMUM_CAPACITY))
+    }
+
+    override fun newFish(existingObjects: Set<AquariumObject>): Fish? {
+        for (i in 1..5) {
+            var x = this.position.x - i
+            var y = this.position.y - i
+            for (j in 0 .. 2) {
+                if (this.canPlaceObject(x, y, existingObjects))
+                    return Minnow(Point(x, y), Fish.MAXIMUM_CAPACITY)
+                x += i * j
+                if (this.canPlaceObject(x, y, existingObjects))
+                    return Minnow(Point(x, y), Fish.MAXIMUM_CAPACITY)
+                y += i * j
+                if (this.canPlaceObject(x, y, existingObjects))
+                    return Minnow(Point(x, y), Fish.MAXIMUM_CAPACITY)
+                x -= i * j
+                if (this.canPlaceObject(x, y, existingObjects))
+                    return Minnow(Point(x, y), Fish.MAXIMUM_CAPACITY)
+                y -= i * j
+            }
+        }
+        return null
     }
 }
