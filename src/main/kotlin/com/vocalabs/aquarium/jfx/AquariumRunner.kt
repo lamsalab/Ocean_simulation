@@ -39,6 +39,7 @@ class AquariumRunner : javafx.application.Application() {
             print("Enter the height (Type:Double): ")
             val y = scanner.nextDouble()
 
+            // This is completely the wrong way to do JFX animations, but we don't have time to learn AnimationTimer.
             val runnable = Runnable {
                 while (mainGc == null) {
                     Thread.sleep(100)
