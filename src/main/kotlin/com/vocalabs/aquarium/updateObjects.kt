@@ -17,7 +17,7 @@ object Main {
     fun updateObjects(listOfObjects: List<AquariumObject>): List<AquariumObject> {
         val random = Random()
         //val intStream= random.ints(0, 100).limit(listOfObjects.size.toLong())
-        val intArray = intStream.toArray()
+        //val intArray = intStream.toArray()
 
         var updateResults: List<UpdateResult> = listOfObjects.mapIndexed { i, aquariumObject ->  aquariumObject.update(listOfObjects.toSet(), intArray[i], aquarium)}
         var killSet: Set<AquariumObject> = Collections.emptySet()
