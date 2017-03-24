@@ -8,17 +8,19 @@ data class Shark (override val position: Point, override val movesLeft: Int) : F
 
     @Eg(construct = arrayOf("new com.vocalabs.aquarium.Point(1, 1)", "5"),
             given = arrayOf("java.util.Collections.emptySet()", "0", "new com.vocalabs.aquarium.Aquarium(5, 5)"),
-            returns = "new com.vocalabs.aquarium.UpdateResult(java.util.Collections.emptySet(), new com.vocalabs.aquarium.Shark(new com.vocalabs.aquarium.Point(1, 1), 5), new com.vocalabs.aquarium.Shark(new com.vocalabs.aquarium.Point(1, 2), 4))")
+            returns = "new com.vocalabs.aquarium.UpdateResult(java.util.Collections.emptySet(), java.util.Collections.emptySet(), new com.vocalabs.aquarium.Shark(new com.vocalabs.aquarium.Point(1, 1), 5), new com.vocalabs.aquarium.Shark(new com.vocalabs.aquarium.Point(1, 2), 4))")
     @Eg(construct = arrayOf("new com.vocalabs.aquarium.Point(1, 0)", "5"),
             given = arrayOf("java.util.Collections.emptySet()", "2", "new com.vocalabs.aquarium.Aquarium(3, 3)"),
-            returns = "new com.vocalabs.aquarium.UpdateResult(java.util.Collections.emptySet(), new com.vocalabs.aquarium.Shark(new com.vocalabs.aquarium.Point(1, 0), 5), new com.vocalabs.aquarium.Shark(new com.vocalabs.aquarium.Point(1, 2), 4))")
+            returns = "new com.vocalabs.aquarium.UpdateResult(java.util.Collections.emptySet(), java.util.Collections.emptySet(), new com.vocalabs.aquarium.Shark(new com.vocalabs.aquarium.Point(1, 0), 5), new com.vocalabs.aquarium.Shark(new com.vocalabs.aquarium.Point(1, 2), 4))")
     override fun update(allObjects: Set<AquariumObject>, randomInt: Int, aquarium: Aquarium): UpdateResult {
         var killSet: Set<AquariumObject> = setOf()
+        var addSet: Set<AquariumObject> = setOf()
 
         for (obj in allObjects) {
             if (obj.position.equals(this.position)) {
                 if (obj is Minnow) {
                     killSet = killSet.plus(obj)
+                    addSet = addSet.plus(Minnow(Point(this.position.x, this.position.y + 1), Fish.Companion.MAXIMUM_CAPACITY))
                 }
             }
         }
@@ -28,8 +30,8 @@ data class Shark (override val position: Point, override val movesLeft: Int) : F
         }
 
         if ((killSet.isEmpty()) || (killSet.elementAt(0) !is Minnow))
-            return UpdateResult(killSet, this, Shark(nextPosition(aquarium, randomInt), movesLeft - 1))
+            return UpdateResult(killSet, addSet, this, Shark(nextPosition(aquarium, randomInt), movesLeft - 1))
         else
-            return UpdateResult(killSet, this, Shark(nextPosition(aquarium, randomInt), Fish.Companion.MAXIMUM_CAPACITY))
+            return UpdateResult(killSet, addSet, this, Shark(nextPosition(aquarium, randomInt), Fish.Companion.MAXIMUM_CAPACITY))
     }
 }
