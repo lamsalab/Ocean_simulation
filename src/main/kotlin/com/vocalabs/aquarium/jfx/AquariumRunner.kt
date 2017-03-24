@@ -1,6 +1,7 @@
 package com.vocalabs.aquarium.jfx
 
 import javafx.application.Application
+import javafx.application.Platform
 import javafx.scene.Group
 import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
@@ -32,28 +33,24 @@ class AquariumRunner : javafx.application.Application() {
 
         @JvmStatic fun main(args: Array<String>) {
 
-            var scanner = Scanner(System.`in`)
+            val scanner = Scanner(System.`in`)
             print("Enter the width (Type:Double): ")
-            var x = scanner.nextDouble()
+            val x = scanner.nextDouble()
             print("Enter the height (Type:Double): ")
-            var y = scanner.nextDouble()
+            val y = scanner.nextDouble()
 
             val runnable = Runnable {
-                while(true) {
-                    val gc = mainGc
-                    if (gc == null) {
-                        Thread.sleep(1000)
-                    }
-                    else {
-                        Simulator(gc, x, y).run()
-                    }
+                while (mainGc == null) {
+                    Thread.sleep(100)
                 }
+                Simulator(mainGc!!, x, y).run()
             }
 
             val thread = Thread(runnable)
             thread.isDaemon = true
             thread.start()
 
+            Platform.setImplicitExit(true)
             Application.launch(AquariumRunner::class.java)
         }
     }
