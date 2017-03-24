@@ -10,9 +10,9 @@ object Main {
     var allObjects: List<AquariumObject> = listOf(Shark(Point(1, 1), 5), Minnow(Point(2, 0), 5), Plant(Point(5, 1)),
             Shark(Point(3, 3), 5), Minnow(Point (1, 6), 5), Minnow(Point(6, 3), 5), Plant(Point(8, 2)))
 
-    /*@Eg(construct = arrayOf(""),
+    @Eg(construct = arrayOf(""),
             given = arrayOf("new java.util.ArrayList().add(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 1), 5))"),
-            returns = "new java.util.ArrayList().add(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 2), 4))")*/
+            returns = "new java.util.ArrayList().add(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 2), 4))")
     @JvmStatic
     fun updateObjects(listOfObjects: List<AquariumObject>): List<AquariumObject> {
         val random = Random()
@@ -69,7 +69,7 @@ object Main {
         print('\n')
     }
 
-    @JvmStatic
+  /*  @JvmStatic
     fun main(args: Array<String>) {
         printOcean(allObjects)
         while(true){
@@ -78,5 +78,5 @@ object Main {
             Thread.sleep(1000)
         }
 
-    }
+    }*/
 }
