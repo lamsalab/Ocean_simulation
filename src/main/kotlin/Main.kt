@@ -55,10 +55,10 @@ object Main {
         }
     }
 
-    /*@Eg(construct = arrayOf(""),
+    @Eg(construct = arrayOf(""),
             given = arrayOf("new java.util.ArrayList().add(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 1), 5))"),
             returns = "new java.util.ArrayList().add(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 2), 4))")
-            These tests will pass when 0 is passed to update instead of random.nextInt()*/
+
     @JvmStatic
     fun updateObjects(listOfObjects: List<AquariumObject>): List<AquariumObject> {
         var updateResults: List<UpdateResult> = listOfObjects.map { aquariumObject ->  aquariumObject.update(listOfObjects.toSet(), random.nextInt(), aquarium)}
@@ -114,7 +114,7 @@ object Main {
         print('\n')
     }
 
-    @JvmStatic
+  /*  @JvmStatic
     fun main(args: Array<String>) {
         var allObjects = generateObjectList(4, 4, 4)
         printOcean(allObjects)
@@ -124,5 +124,5 @@ object Main {
             Thread.sleep(1000)
         }
 
-    }
+    }*/
 }

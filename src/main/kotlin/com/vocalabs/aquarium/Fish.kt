@@ -7,7 +7,7 @@ interface Fish : AquariumObject {
     val movesLeft: Int
 
     companion object {
-        val MAXIMUM_CAPACITY = 5
+        val MAXIMUM_CAPACITY = 10
 
         fun nextPositionRaw(randomInt: Int, position: Point): Point {
             return when (randomInt % 4) {
