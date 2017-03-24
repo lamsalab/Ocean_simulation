@@ -1,3 +1,6 @@
+package com.vocalabs.aquarium
+
+import com.vocalabs.aquarium.Point
 import java.util.stream.IntStream
 
 interface AquariumObject {

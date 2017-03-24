@@ -1,3 +1,7 @@
+package com.vocalabs.aquarium
+
+import com.vocalabs.aquarium.Point
+
 interface Fish : AquariumObject {
 
     val movesLeft: Int

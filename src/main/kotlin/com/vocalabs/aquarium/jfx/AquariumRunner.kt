@@ -10,10 +10,11 @@ import javafx.stage.Stage
 
 class AquariumRunner : javafx.application.Application() {
 
+
     override fun start(primaryStage: Stage) {
         primaryStage.title = "Drawing Operations Test"
         val root = Group()
-        val canvas = Canvas(300.0, 250.0)
+        val canvas = Canvas(500.0, 500.0)
         val gc = canvas.graphicsContext2D
         root.children.add(canvas)
         primaryStage.scene = Scene(root)
@@ -29,6 +30,7 @@ class AquariumRunner : javafx.application.Application() {
 
 
         @JvmStatic fun main(args: Array<String>) {
+
             val runnable = Runnable {
                 while(true) {
                     val gc = mainGc
