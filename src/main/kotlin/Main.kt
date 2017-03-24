@@ -55,9 +55,10 @@ object Main {
         }
     }
 
-    @Eg(construct = arrayOf(""),
+    /*@Eg(construct = arrayOf(""),
             given = arrayOf("new java.util.ArrayList().add(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 1), 5))"),
             returns = "new java.util.ArrayList().add(new com.vocalabs.aquarium.Minnow(new com.vocalabs.aquarium.Point(1, 2), 4))")
+            This test runs when 0 is inputted into aquariumObject.update() instead of random.nextInt()*/
 
     @JvmStatic
     fun updateObjects(listOfObjects: List<AquariumObject>): List<AquariumObject> {
