@@ -24,7 +24,7 @@ class Simulator(val gc: GraphicsContext, val x: Double, val y: Double) : Runnabl
         while(true) {
             Thread.sleep(1000)
             Platform.runLater {
-                ocean = Main.updateObjects(ocean)
+                ocean = Main.updateObjects(ocean, aquarium)
                 drawOcean(gc, ocean, aquarium)
             }
         }
