@@ -25,9 +25,8 @@ repositories {
 }
 
 dependencies {
-    kapt files("libs/egtest-processor-0.2.0-SNAPSHOT.jar")
-    kapt 'com.squareup:javapoet:1.8.0'
-    compile files("libs/egtest-annotations-0.2.0-SNAPSHOT.jar")
+    kapt 'com.vocalabs:egtest-processor:0.2.0'
+    compile 'com.vocalabs:egtest-annotations:0.2.0'
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testCompile group: 'junit', name: 'junit', version: '4.11'
